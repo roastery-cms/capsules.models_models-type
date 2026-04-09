@@ -59,5 +59,10 @@
         "typescript": "^5",
         "tsup": "^8.5.1"
     },
-    "dependencies": {}
+    "dependencies": {
+        "@roastery/barista": "^0.0.5",
+        "@roastery/beans": "^0.0.4",
+        "@roastery/seedbed": "^0.0.2",
+        "@roastery/terroir": "^0.0.9"
+    }
 }

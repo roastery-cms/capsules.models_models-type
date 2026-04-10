@@ -50,6 +50,7 @@
     "devDependencies": {
         "@commitlint/cli": "^20.4.1",
         "@commitlint/config-conventional": "^20.4.1",
+        "@elysiajs/eden": "^1.4.9",
         "@faker-js/faker": "^10.2.0",
         "husky": "^9.1.7",
         "knip": "^6.0.3"
@@ -62,6 +63,11 @@
     "dependencies": {
         "@roastery-adapters/cache": "^0.0.5",
         "@roastery-adapters/models": "^0.0.4",
+        "@roastery-capsules/api-docs": "^0.0.3",
+        "@roastery-capsules/api-error-handler": "^0.0.4",
+        "@roastery-capsules/api-response-mapper": "^0.0.2",
+        "@roastery-capsules/auth": "^0.0.1",
+        "@roastery-capsules/env": "^0.0.4",
         "@roastery/barista": "^0.0.5",
         "@roastery/beans": "^0.0.4",
         "@roastery/seedbed": "^0.0.2",

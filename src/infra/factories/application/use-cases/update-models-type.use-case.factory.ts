@@ -4,13 +4,13 @@ import { makeSlugUniquenessCheckerService } from "@/infra/factories/domain/servi
 import type { IModelsTypeRepository } from "@/domain/types/repositories/models-type.repository.interface";
 
 export function makeUpdateModelsTypeUseCase(
-	repository: IModelsTypeRepository,
+    repository: IModelsTypeRepository,
 ): UpdateModelsTypeUseCase {
-	const findModelsType = makeFindModelsTypeUseCase(repository);
-	const uniquenessChecker = makeSlugUniquenessCheckerService(repository);
-	return new UpdateModelsTypeUseCase(
-		repository,
-		findModelsType,
-		uniquenessChecker,
-	);
+    const findModelsType = makeFindModelsTypeUseCase(repository);
+    const uniquenessChecker = makeSlugUniquenessCheckerService(repository);
+    return new UpdateModelsTypeUseCase(
+        repository,
+        findModelsType,
+        uniquenessChecker,
+    );
 }

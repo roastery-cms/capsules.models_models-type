@@ -1,1 +1,1 @@
-export type { IModelsTypeUniquenessCheckerService as IPostTypeUniquenessCheckerService } from "./post-type-uniqueness-checker.service.interface";
+export type { IModelsTypeUniquenessCheckerService } from "./models-type-uniqueness-checker.service.interface";

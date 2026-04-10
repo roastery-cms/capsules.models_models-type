@@ -33,6 +33,8 @@ coveragePathIgnorePatterns = [
   "src/infra/repositories/prisma/**",
   "src/infra/repositories/cached/**",
 
+  "src/infra/repositories/cache/models-type.mapper.ts",
+
   # Dev bootstrap (test harness, not production code)
   "src/presentation/dev/**",
 

@@ -2,14 +2,14 @@ import { beforeEach, describe, expect, it } from "bun:test";
 import { UpdateModelsTypeUseCase } from "./update-models-type.use-case";
 import { FindModelsTypeUseCase } from "./find-models-type.use-case";
 import { ModelsTypeRepository } from "@/infra/repositories/test/models-type.repository";
-import { FindEntityByTypeUseCase } from "@roastery/seedbed/application/use-cases";
 import { SlugUniquenessCheckerService } from "@roastery/seedbed/domain/services";
 import {
     InvalidOperationException,
     ResourceAlreadyExistsException,
     ResourceNotFoundException,
 } from "@roastery/terroir/exceptions/application";
-import { makeModelsType } from "@/infra/factories/domain/make-models-type.factory";
+import { makeFindEntityByUseCase } from "@/infra/factories/application/use-cases/defaults";
+import { makeModelsType } from "@/infra/factories/domain";
 
 describe("UpdateModelsTypeUseCase", () => {
     let repository: ModelsTypeRepository;
@@ -17,10 +17,8 @@ describe("UpdateModelsTypeUseCase", () => {
 
     beforeEach(() => {
         repository = new ModelsTypeRepository();
-        const findEntityByType = new FindEntityByTypeUseCase(repository);
-        const findModelsType = new FindModelsTypeUseCase(
-            findEntityByType as unknown as never,
-        );
+        const findEntityByType = makeFindEntityByUseCase(repository);
+        const findModelsType = new FindModelsTypeUseCase(findEntityByType);
         const uniquenessChecker = new SlugUniquenessCheckerService(repository);
         useCase = new UpdateModelsTypeUseCase(
             repository,

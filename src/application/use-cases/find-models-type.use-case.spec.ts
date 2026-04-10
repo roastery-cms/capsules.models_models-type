@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it } from "bun:test";
 import { FindModelsTypeUseCase } from "./find-models-type.use-case";
 import { ModelsTypeRepository } from "@/infra/repositories/test/models-type.repository";
-import { FindEntityByTypeUseCase } from "@roastery/seedbed/application/use-cases";
 import { ResourceNotFoundException } from "@roastery/terroir/exceptions/application";
-import { makeModelsType } from "@/infra/factories/domain/make-models-type.factory";
+import { makeFindEntityByUseCase } from "@/infra/factories/application/use-cases/defaults";
+import { makeModelsType } from "@/infra/factories/domain";
 
 describe("FindModelsTypeUseCase", () => {
     let repository: ModelsTypeRepository;
@@ -11,10 +11,8 @@ describe("FindModelsTypeUseCase", () => {
 
     beforeEach(() => {
         repository = new ModelsTypeRepository();
-        const findEntityByType = new FindEntityByTypeUseCase(repository);
-        useCase = new FindModelsTypeUseCase(
-            findEntityByType as unknown as never,
-        );
+        const findEntityByType = makeFindEntityByUseCase(repository);
+        useCase = new FindModelsTypeUseCase(findEntityByType);
     });
 
     it("should find a models type by id", async () => {

@@ -60,6 +60,8 @@
         "tsup": "^8.5.1"
     },
     "dependencies": {
+        "@roastery-adapters/cache": "^0.0.5",
+        "@roastery-adapters/models": "^0.0.4",
         "@roastery/barista": "^0.0.5",
         "@roastery/beans": "^0.0.4",
         "@roastery/seedbed": "^0.0.2",

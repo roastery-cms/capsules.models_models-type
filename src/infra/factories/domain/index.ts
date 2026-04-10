@@ -1,1 +1,1 @@
-export { makeModelsType } from "./make-models-type.factory";
+export { makeModelsType } from "./models-type.factory";

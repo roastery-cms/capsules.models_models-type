@@ -30,7 +30,7 @@ describe("SchemaDTO", () => {
 	});
 
 	it("should accept a JSON array string", () => {
-		expect(schema.match('[1, 2, 3]')).toBe(true);
+		expect(schema.match("[1, 2, 3]")).toBe(true);
 	});
 
 	it("should reject an empty string", () => {

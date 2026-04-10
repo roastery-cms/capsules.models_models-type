@@ -4,15 +4,15 @@ import { parsePrismaDateTimeToISOString } from "@roastery-adapters/models/helper
 import { Mapper } from "@roastery/beans";
 
 type Input = Omit<IUnpackedModelsType, "createdAt" | "updatedAt"> & {
-    id: string;
-    createdAt: Date;
-    updatedAt: Date | null;
+	id: string;
+	createdAt: Date;
+	updatedAt: Date | null;
 };
 
 export const ModelsTypeMapper = {
-    run: (_data: Input): IModelsType => {
-        const data: IUnpackedModelsType = parsePrismaDateTimeToISOString(_data);
+	run: (_data: Input): IModelsType => {
+		const data: IUnpackedModelsType = parsePrismaDateTimeToISOString(_data);
 
-        return Mapper.toDomain(data, ModelsType.make) as IModelsType;
-    },
+		return Mapper.toDomain(data, ModelsType.make) as IModelsType;
+	},
 } as const;

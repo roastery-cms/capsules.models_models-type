@@ -7,24 +7,24 @@ import { EntitySource } from "@roastery/beans/entity/symbols";
 import type { IModelsTypeUniquenessCheckerService } from "@/domain/types/services";
 
 export class CreateModelsTypeUseCase {
-    public constructor(
-        private readonly writer: IModelsTypeWriter,
-        private readonly uniquenessChecker: IModelsTypeUniquenessCheckerService,
-    ) {}
+	public constructor(
+		private readonly writer: IModelsTypeWriter,
+		private readonly uniquenessChecker: IModelsTypeUniquenessCheckerService,
+	) {}
 
-    public async run({
-        description,
-        name,
-        schema,
-    }: CreateModelsTypeDTO): Promise<IModelsType> {
-        const modelsType = ModelsType.make({ description, name, schema });
-        const isUnique = await this.uniquenessChecker.run(modelsType.slug);
+	public async run({
+		description,
+		name,
+		schema,
+	}: CreateModelsTypeDTO): Promise<IModelsType> {
+		const modelsType = ModelsType.make({ description, name, schema });
+		const isUnique = await this.uniquenessChecker.run(modelsType.slug);
 
-        if (!isUnique)
-            throw new ResourceAlreadyExistsException(ModelsType[EntitySource]);
+		if (!isUnique)
+			throw new ResourceAlreadyExistsException(ModelsType[EntitySource]);
 
-        await this.writer.create(modelsType);
+		await this.writer.create(modelsType);
 
-        return modelsType;
-    }
+		return modelsType;
+	}
 }

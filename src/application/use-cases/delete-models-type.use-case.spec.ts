@@ -7,39 +7,39 @@ import { makeFindEntityByUseCase } from "@/infra/factories/application/use-cases
 import { makeModelsType } from "@/infra/factories/domain";
 
 describe("DeleteModelsTypeUseCase", () => {
-    let repository: ModelsTypeRepository;
-    let useCase: DeleteModelsTypeUseCase;
+	let repository: ModelsTypeRepository;
+	let useCase: DeleteModelsTypeUseCase;
 
-    beforeEach(() => {
-        repository = new ModelsTypeRepository();
-        const findEntityByType = makeFindEntityByUseCase(repository);
-        const findModelsType = new FindModelsTypeUseCase(findEntityByType);
-        useCase = new DeleteModelsTypeUseCase(repository, findModelsType);
-    });
+	beforeEach(() => {
+		repository = new ModelsTypeRepository();
+		const findEntityByType = makeFindEntityByUseCase(repository);
+		const findModelsType = new FindModelsTypeUseCase(findEntityByType);
+		useCase = new DeleteModelsTypeUseCase(repository, findModelsType);
+	});
 
-    it("should delete a models type by id", async () => {
-        const entity = makeModelsType();
-        repository.seed([entity]);
+	it("should delete a models type by id", async () => {
+		const entity = makeModelsType();
+		repository.seed([entity]);
 
-        const deleted = await useCase.run(entity.id);
+		const deleted = await useCase.run(entity.id);
 
-        expect(deleted).toBe(entity);
-        expect(await repository.count()).toBe(0);
-    });
+		expect(deleted).toBe(entity);
+		expect(await repository.count()).toBe(0);
+	});
 
-    it("should delete a models type by slug", async () => {
-        const entity = makeModelsType();
-        repository.seed([entity]);
+	it("should delete a models type by slug", async () => {
+		const entity = makeModelsType();
+		repository.seed([entity]);
 
-        const deleted = await useCase.run(entity.slug);
+		const deleted = await useCase.run(entity.slug);
 
-        expect(deleted).toBe(entity);
-        expect(await repository.count()).toBe(0);
-    });
+		expect(deleted).toBe(entity);
+		expect(await repository.count()).toBe(0);
+	});
 
-    it("should throw ResourceNotFoundException when entity does not exist", async () => {
-        expect(useCase.run("nonexistent-slug")).rejects.toBeInstanceOf(
-            ResourceNotFoundException,
-        );
-    });
+	it("should throw ResourceNotFoundException when entity does not exist", async () => {
+		expect(useCase.run("nonexistent-slug")).rejects.toBeInstanceOf(
+			ResourceNotFoundException,
+		);
+	});
 });

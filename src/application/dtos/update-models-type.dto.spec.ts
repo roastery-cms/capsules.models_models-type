@@ -7,7 +7,11 @@ describe("UpdateModelsTypeDTO", () => {
 
 	it("should accept a DTO with all optional fields", () => {
 		expect(
-			schema.match({ name: "Review", slug: "review", description: "A review." }),
+			schema.match({
+				name: "Review",
+				slug: "review",
+				description: "A review.",
+			}),
 		).toBe(true);
 	});
 

@@ -1,23 +1,22 @@
-# @roastery-capsules/post.post-type
+# @roastery-capsules/models.models-type
 
-Post type management capsule for the [Roastery CMS](https://github.com/roastery-cms) ecosystem.
+Models type management capsule for the [Roastery CMS](https://github.com/roastery-cms) ecosystem.
 
 [![Checked with Biome](https://img.shields.io/badge/Checked_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
 
 ## Overview
 
-**@roastery-capsules/post.post-type** is an [Elysia](https://elysiajs.com) capsule that provides full CRUD management for post types, including TypeBox schema definition, automatic slug generation, uniqueness validation, highlighting, pagination, and optional Redis caching.
+**@roastery-capsules/models.models-type** is an [Elysia](https://elysiajs.com) capsule that provides full CRUD management for models types, including TypeBox schema definition, automatic slug generation, uniqueness validation, pagination, and optional Redis caching.
 
-It exposes `PostTypeRoutes`, an Elysia plugin ready to be mounted in your application, with the following endpoints:
+It exposes `ModelsTypeRoutes`, an Elysia plugin ready to be mounted in your application, with the following endpoints:
 
 | Method | Path | Auth | Description |
 |--------|------|------|-------------|
-| `POST` | `/post-types/` | Required | Create a new post type |
-| `GET` | `/post-types/` | Public | List post types (paginated) |
-| `GET` | `/post-types/highlights` | Public | List highlighted post types (paginated) |
-| `GET` | `/post-types/:id-or-slug` | Public | Get post type by ID or slug |
-| `PATCH` | `/post-types/:id-or-slug` | Required | Update a post type |
-| `DELETE` | `/post-types/:id-or-slug` | Required | Delete a post type |
+| `POST` | `/models-types/` | Required | Create a new models type |
+| `GET` | `/models-types/` | Public | List models types (paginated) |
+| `GET` | `/models-types/:id-or-slug` | Public | Get models type by ID or slug |
+| `PATCH` | `/models-types/:id-or-slug` | Required | Update a models type |
+| `DELETE` | `/models-types/:id-or-slug` | Required | Delete a models type |
 
 ## Technologies
 
@@ -28,7 +27,7 @@ It exposes `PostTypeRoutes`, an Elysia plugin ready to be mounted in your applic
 | [@roastery/terroir](https://github.com/roastery-cms) | Runtime schema validation and exception handling |
 | [@roastery/beans](https://github.com/roastery-cms) | Domain entity base class |
 | [@roastery/seedbed](https://github.com/roastery-cms) | Repository and use-case contracts |
-| [@roastery-adapters/post](https://github.com/roastery-cms) | Prisma post type repository adapter |
+| [@roastery-adapters/models](https://github.com/roastery-cms) | Prisma models repository adapter |
 | [@roastery-adapters/cache](https://github.com/roastery-cms) | Redis caching adapter |
 | [@roastery-capsules/auth](https://github.com/roastery-cms) | Authentication plugin |
 | [Prisma](https://www.prisma.io) | ORM for data persistence |
@@ -40,7 +39,7 @@ It exposes `PostTypeRoutes`, an Elysia plugin ready to be mounted in your applic
 ## Installation
 
 ```bash
-bun add @roastery-capsules/post.post-type
+bun add @roastery-capsules/models.models-type
 ```
 
 **Peer dependencies** (install alongside):
@@ -55,74 +54,68 @@ bun add @types/bun tsup typescript
 
 ```typescript
 import { Elysia } from 'elysia';
-import { PostTypeRoutes } from '@roastery-capsules/post.post-type/presentation';
+import { ModelsTypeRoutes } from '@roastery-capsules/models.models-type/presentation';
 
 const app = new Elysia()
-  .use(PostTypeRoutes({ repository }))
+  .use(ModelsTypeRoutes({ repository }))
   .listen(3000);
 ```
 
-### Post type entity
+### Models type entity
 
-Each `PostType` has the following properties:
+Each `ModelsType` has the following properties:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | `string` | Display name (e.g. `"review"`, `"blog-post"`) |
+| `name` | `string` | Display name (e.g. `"Review"`, `"Product"`) |
 | `slug` | `string` | URL-friendly identifier (auto-generated from name) |
-| `schema` | `string` | Serialized TypeBox schema defining the post's structure |
-| `isHighlighted` | `boolean` | Highlight flag (default: `false`) |
+| `description` | `string` | Brief description of the models type |
+| `schema` | `string` | Serialized TypeBox schema defining the content structure |
 
-### Creating a post type
+### Creating a models type
 
 ```http
-POST /post-types/
+POST /models-types/
 Content-Type: application/json
 Authorization: Bearer <token>
 
 {
   "name": "Review",
+  "description": "A review written by a user about a product.",
   "schema": "<serialized TypeBox schema via SchemaManager>"
 }
 ```
 
-### Listing post types
+### Listing models types
 
 ```http
-GET /post-types/?page=1&limit=10
+GET /models-types/?page=1
 ```
 
-### Listing highlighted post types
+### Getting a models type by ID or slug
 
 ```http
-GET /post-types/highlights?page=1&limit=10
+GET /models-types/review
+GET /models-types/<uuid>
 ```
 
-### Getting a post type by ID or slug
+### Updating a models type
 
 ```http
-GET /post-types/review
-GET /post-types/<uuid>
-```
-
-### Updating a post type
-
-```http
-PATCH /post-types/review
+PATCH /models-types/review?update-slug=true
 Content-Type: application/json
 Authorization: Bearer <token>
 
 {
   "name": "Book Review",
-  "slug": "book-review",
-  "isHighlighted": true
+  "description": "A review about a book."
 }
 ```
 
-### Deleting a post type
+### Deleting a models type
 
 ```http
-DELETE /post-types/review
+DELETE /models-types/review
 Authorization: Bearer <token>
 ```
 

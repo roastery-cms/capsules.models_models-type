@@ -1,6 +1,6 @@
 export interface IConstructorModelsType {
-    name: string;
-    slug: string;
-    description: string;
-    schema: string;
+	name: string;
+	slug: string;
+	description: string;
+	schema: string;
 }

@@ -8,7 +8,8 @@ describe("CreateModelsTypeDTO", () => {
 	const makeValidDTO = () => ({
 		name: "Review",
 		description: "A review written by a user.",
-		schema: '{"type":"object","properties":{"content":{"type":"string","minLength":1}},"required":["content"]}',
+		schema:
+			'{"type":"object","properties":{"content":{"type":"string","minLength":1}},"required":["content"]}',
 	});
 
 	it("should accept a valid DTO", () => {

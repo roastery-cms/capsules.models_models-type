@@ -3,7 +3,7 @@ import type { PrismaClient } from "@roastery-adapters/models";
 import type { RepositoryProviderDTO } from "../dtos";
 
 export interface IMakeModelsTypeRepositoryArgs {
-    target?: RepositoryProviderDTO;
-    cache: BaristaCacheInstance;
-    prismaClient?: PrismaClient;
+	target?: RepositoryProviderDTO;
+	cache: BaristaCacheInstance;
+	prismaClient?: PrismaClient;
 }

@@ -1,13 +1,31 @@
 {
     "name": "@roastery-capsules/models.models-type",
-    "description": "",
+    "description": "Models type management capsule for the Roastery CMS ecosystem — CRUD operations with schema definition, slug generation, pagination, and optional caching.",
     "version": "0.0.1",
     "author": {
         "name": "Alan Reis",
         "email": "alanreisanjo@gmail.com",
         "url": "https://github.com/Hoyasumii"
     },
-    "keywords": [],
+    "keywords": [
+        "roastery",
+        "roastery-cms",
+        "cms",
+        "capsule",
+        "elysia",
+        "typescript",
+        "rest-api",
+        "models-type",
+        "crud",
+        "schema",
+        "pagination",
+        "caching",
+        "prisma",
+        "redis",
+        "ddd",
+        "clean-architecture",
+        "bun"
+    ],
     "license": "MIT",
     "repository": {
         "type": "git",
@@ -44,7 +62,7 @@
         "test:unit": "bun test --env-file=.env.testing",
         "test:coverage": "bun test --env-file=.env.testing --coverage",
         "setup": "bun run build && bun link",
-        "prepare": "husky",
+        "prepare": "husky || true",
         "knip": "knip"
     },
     "devDependencies": {

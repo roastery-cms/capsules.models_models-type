@@ -3,8 +3,8 @@ import type { IModelsTypeRepository } from "@/domain/types/repositories/models-t
 import { makeFindEntityByUseCase } from "./defaults";
 
 export function makeFindModelsTypeUseCase(
-    repository: IModelsTypeRepository,
+	repository: IModelsTypeRepository,
 ): FindModelsTypeUseCase {
-    const findEntityByType = makeFindEntityByUseCase(repository);
-    return new FindModelsTypeUseCase(findEntityByType);
+	const findEntityByType = makeFindEntityByUseCase(repository);
+	return new FindModelsTypeUseCase(findEntityByType);
 }

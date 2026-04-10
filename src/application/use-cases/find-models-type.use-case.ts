@@ -6,15 +6,15 @@ import { EntitySource } from "@roastery/beans/entity/symbols";
 import type { FindEntityByTypeUseCase } from "@roastery/seedbed/application/use-cases";
 
 export class FindModelsTypeUseCase {
-    public constructor(
-        private readonly findEntityByType: FindEntityByTypeUseCase<
-            typeof UnpackedModelsTypeDTO,
-            IModelsType,
-            IModelsTypeReader
-        >,
-    ) {}
+	public constructor(
+		private readonly findEntityByType: FindEntityByTypeUseCase<
+			typeof UnpackedModelsTypeDTO,
+			IModelsType,
+			IModelsTypeReader
+		>,
+	) {}
 
-    public run(value: string): Promise<IModelsType> {
-        return this.findEntityByType.run(value, ModelsType[EntitySource]);
-    }
+	public run(value: string): Promise<IModelsType> {
+		return this.findEntityByType.run(value, ModelsType[EntitySource]);
+	}
 }

@@ -3,8 +3,9 @@ import type { UnpackedModelsTypeSchema } from "../schemas";
 import type { IRawModelsType } from "./raw-models-type.interface";
 
 export interface IModelsType
-    extends IEntity<UnpackedModelsTypeSchema>, IRawModelsType {
-    rename(value: string): void;
-    reslug(value: string): void;
-    changeDescription(value: string): void;
+	extends IEntity<UnpackedModelsTypeSchema>,
+		IRawModelsType {
+	rename(value: string): void;
+	reslug(value: string): void;
+	changeDescription(value: string): void;
 }

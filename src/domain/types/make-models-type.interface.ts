@@ -1,6 +1,6 @@
 export interface IMakeModelsType {
-    name: string;
-    slug?: string;
-    description: string;
-    schema: string;
+	name: string;
+	slug?: string;
+	description: string;
+	schema: string;
 }

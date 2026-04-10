@@ -6,32 +6,30 @@ import { PaginationDTO } from "@roastery/seedbed/presentation/dtos";
 import { FindManyModelsTypeResponseDTO } from "./dtos";
 
 export function FindManyModelsTypeController({
-    modelsTypeRepository,
+	modelsTypeRepository,
 }: IControllersWithoutAuth) {
-    return barista()
-        .use(ModelsTypeRepositoryPlugin(modelsTypeRepository))
-        .derive({ as: "local" }, ({ modelsTypeRepository }) => ({
-            findManyModelsType:
-                makeFindManyModelsTypeUseCase(modelsTypeRepository),
-        }))
-        .get(
-            "/",
-            async ({ query: { page }, findManyModelsType, status, set }) => {
-                const { count, totalPages, value } =
-                    await findManyModelsType.run(page);
+	return barista()
+		.use(ModelsTypeRepositoryPlugin(modelsTypeRepository))
+		.derive({ as: "local" }, ({ modelsTypeRepository }) => ({
+			findManyModelsType: makeFindManyModelsTypeUseCase(modelsTypeRepository),
+		}))
+		.get(
+			"/",
+			async ({ query: { page }, findManyModelsType, status, set }) => {
+				const { count, totalPages, value } = await findManyModelsType.run(page);
 
-                set.headers["X-Total-Count"] = String(count);
-                set.headers["X-Total-Pages"] = String(totalPages);
+				set.headers["X-Total-Count"] = String(count);
+				set.headers["X-Total-Pages"] = String(totalPages);
 
-                return status(200, value as never);
-            },
-            {
-                query: PaginationDTO,
-                detail: {
-                    summary: "Find many models types",
-                    description: "Retrieves a paginated list of models types.",
-                },
-                response: { 200: FindManyModelsTypeResponseDTO },
-            },
-        );
+				return status(200, value as never);
+			},
+			{
+				query: PaginationDTO,
+				detail: {
+					summary: "Find many models types",
+					description: "Retrieves a paginated list of models types.",
+				},
+				response: { 200: FindManyModelsTypeResponseDTO },
+			},
+		);
 }

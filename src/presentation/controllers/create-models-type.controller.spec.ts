@@ -1,7 +1,6 @@
 import { beforeEach, describe, expect, it } from "bun:test";
 import { treaty } from "@elysiajs/eden";
 import { faker } from "@faker-js/faker";
-import { generateUUID } from "@roastery/beans/entity/helpers";
 import { UuidSchema } from "@roastery/beans/collections/schemas";
 import { bootstrap } from "../server";
 
@@ -85,7 +84,10 @@ describe("CreateModelsTypeController", () => {
         const options = await authenticate();
 
         const { status } = await api["models-types"].post(
-            { name: faker.commerce.productName(), schema: UuidSchema.toString() } as never,
+            {
+                name: faker.commerce.productName(),
+                schema: UuidSchema.toString(),
+            } as never,
             options,
         );
 

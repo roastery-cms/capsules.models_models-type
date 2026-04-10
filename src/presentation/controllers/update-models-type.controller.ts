@@ -11,49 +11,49 @@ import { UpdateModelsTypeDTO } from "@/application/dtos";
 import { UnpackedModelsTypeDTO } from "@/domain/dtos";
 
 export function UpdateModelsTypeController({
-    cacheProvider,
-    jwtSecret,
-    modelsTypeRepository,
-    redisUrl,
+	cacheProvider,
+	jwtSecret,
+	modelsTypeRepository,
+	redisUrl,
 }: IControllersWithAuth) {
-    return barista().use(
-        baristaAuth({
-            layerName: ModelsType[EntitySource],
-            jwtSecret,
-            cacheProvider,
-            redisUrl,
-        })
-            .use(ModelsTypeRepositoryPlugin(modelsTypeRepository))
-            .derive({ as: "local" }, ({ modelsTypeRepository }) => ({
-                updateModelsType:
-                    makeUpdateModelsTypeUseCase(modelsTypeRepository),
-            }))
-            .patch(
-                "/:id-or-slug",
-                async ({
-                    params: { "id-or-slug": idOrSlug },
-                    body,
-                    updateModelsType,
-                    status,
-                    query: { "update-slug": updateSlug },
-                }) => {
-                    const response = await updateModelsType.run(
-                        idOrSlug,
-                        body,
-                        updateSlug,
-                    );
-                    return status(200, response as never);
-                },
-                {
-                    params: IdOrSlugDTO,
-                    query: UpdateModelsTypeQueryDTO,
-                    body: UpdateModelsTypeDTO,
-                    detail: {
-                        summary: "Update a models type",
-                        description: "Updates an existing models type by its ID or slug. Requires authentication.",
-                    },
-                    response: { 200: UnpackedModelsTypeDTO },
-                },
-            ),
-    );
+	return barista().use(
+		baristaAuth({
+			layerName: ModelsType[EntitySource],
+			jwtSecret,
+			cacheProvider,
+			redisUrl,
+		})
+			.use(ModelsTypeRepositoryPlugin(modelsTypeRepository))
+			.derive({ as: "local" }, ({ modelsTypeRepository }) => ({
+				updateModelsType: makeUpdateModelsTypeUseCase(modelsTypeRepository),
+			}))
+			.patch(
+				"/:id-or-slug",
+				async ({
+					params: { "id-or-slug": idOrSlug },
+					body,
+					updateModelsType,
+					status,
+					query: { "update-slug": updateSlug },
+				}) => {
+					const response = await updateModelsType.run(
+						idOrSlug,
+						body,
+						updateSlug,
+					);
+					return status(200, response as never);
+				},
+				{
+					params: IdOrSlugDTO,
+					query: UpdateModelsTypeQueryDTO,
+					body: UpdateModelsTypeDTO,
+					detail: {
+						summary: "Update a models type",
+						description:
+							"Updates an existing models type by its ID or slug. Requires authentication.",
+					},
+					response: { 200: UnpackedModelsTypeDTO },
+				},
+			),
+	);
 }

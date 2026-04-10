@@ -4,10 +4,10 @@ import { barista } from "@roastery/barista";
 import { EntitySource } from "@roastery/beans/entity/symbols";
 
 export function ModelsTypeRepositoryPlugin(
-    modelsTypeRepository: IModelsTypeRepository,
+	modelsTypeRepository: IModelsTypeRepository,
 ) {
-    return barista({ name: ModelsType[EntitySource] }).decorate(
-        "modelsTypeRepository",
-        modelsTypeRepository,
-    );
+	return barista({ name: ModelsType[EntitySource] }).decorate(
+		"modelsTypeRepository",
+		modelsTypeRepository,
+	);
 }
